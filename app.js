@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const app = require("path");
 const cors = require("cors");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
@@ -33,6 +34,9 @@ app.use(cors());
 //   next();
 // });
 
+// Serve static files from the React frontend app
+app.use(express.static(path.join(__dirname, "client/build")));
+
 app.use("/journal", journalRoutes);
 app.use("/todo", todoRoutes);
 
@@ -49,6 +53,11 @@ app.use((error, req, res, next) => {
       message: error.message
     }
   });
+});
+
+// Anything that doesn't match the above, send back index.html
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
 
 module.exports = app;
