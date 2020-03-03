@@ -46,6 +46,11 @@ app.use((req, res, next) => {
   next(error);
 });
 
+// Anything that doesn't match the above, send back index.html
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "/client/build/index.html"));
+});
+
 app.use((error, req, res, next) => {
   res.status(error.status || 500);
   res.json({
@@ -53,11 +58,6 @@ app.use((error, req, res, next) => {
       message: error.message
     }
   });
-});
-
-// Anything that doesn't match the above, send back index.html
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
 
 module.exports = app;
