@@ -9,9 +9,7 @@ const journalRoutes = require("./api/routes/journal/journal");
 const todoRoutes = require("./api/routes/todo/todo");
 
 mongoose.connect(
-  "mongodb+srv://yayjk:" +
-    process.env.MONGO_ATL_PW +
-    "@organizeryayjk-ljhzj.mongodb.net/test?retryWrites=true&w=majority",
+  "mongodb+srv://yayjk:tfKW5NYdRywnbNlD@organizeryayjk-ljhzj.mongodb.net/test?retryWrites=true&w=majority",
   {
     useNewUrlParser: true
   }
