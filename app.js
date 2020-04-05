@@ -7,11 +7,12 @@ const mongoose = require("mongoose");
 
 const journalRoutes = require("./api/routes/journal/journal");
 const todoRoutes = require("./api/routes/todo/todo");
+const fileRoutes = require("./api/routes/files/file");
 
 mongoose.connect(
   "mongodb+srv://yayjk:tfKW5NYdRywnbNlD@organizeryayjk-ljhzj.mongodb.net/test?retryWrites=true&w=majority",
   {
-    useNewUrlParser: true
+    useNewUrlParser: true,
   }
 );
 
@@ -35,6 +36,7 @@ app.use(cors());
 
 app.use("/journal", journalRoutes);
 app.use("/todo", todoRoutes);
+app.use("/file", fileRoutes);
 
 app.use((req, res, next) => {
   const error = new Error("Not Found");
@@ -46,8 +48,8 @@ app.use((error, req, res, next) => {
   res.status(error.status || 500);
   res.json({
     error: {
-      message: error.message
-    }
+      message: error.message,
+    },
   });
 });
 
