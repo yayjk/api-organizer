@@ -15,10 +15,10 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 router.post("/upload", upload.single("file"), (req, res, next) => {
-  try {
-    res.send(req.file);
-  } catch (err) {
-    res.send(400);
+  if (req.file) {
+    res.status(200).json({ message: "successful", file: req.file });
+  } else {
+    res.status(400).json({ message: "failed" });
   }
 });
 
