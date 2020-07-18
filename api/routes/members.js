@@ -37,3 +37,23 @@ router.post("/", (req, res, next) => {
 });
 
 module.exports = router;
+
+//get member details by id
+router.get("/:memberId", (req, res, next) => {
+  const memberId = req.params.memberId;
+  Members.findById(memberId)
+    .exec()
+    .then((memberDetails) => {
+      if (memberDetails) {
+        const returnObject = memberDetails;
+        Members.find({ team: memberDetails.team }, { _id: "" })
+          .then((teamMembersId) => {
+            res.status(200).json({ memberDetails, teamMembersId });
+          })
+          .catch((error) => res.status(500).json(error));
+      } else {
+        res.status(500).json({ error: "No member associated with that id" });
+      }
+    })
+    .catch((error) => res.status(500).json(erro));
+});
