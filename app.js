@@ -8,10 +8,12 @@ const mongoose = require("mongoose");
 const journalRoutes = require("./api/routes/journal/journal");
 const todoRoutes = require("./api/routes/todo/todo");
 const fileRoutes = require("./api/routes/files/file");
+const memberRoutes = require("./api/routes/members");
 
 mongoose.connect(
   "mongodb+srv://yayjk:tfKW5NYdRywnbNlD@organizeryayjk-ljhzj.mongodb.net/test?retryWrites=true&w=majority",
   {
+    useUnifiedTopology: true,
     useNewUrlParser: true,
   }
 );
@@ -37,6 +39,7 @@ app.use(cors());
 app.use("/journal", journalRoutes);
 app.use("/todo", todoRoutes);
 app.use("/file", fileRoutes);
+app.use("/members", memberRoutes);
 
 app.use((req, res, next) => {
   const error = new Error("Not Found");
