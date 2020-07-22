@@ -69,7 +69,7 @@ router.get("/:memberId", (req, res, next) => {
 });
 
 //get member by team
-router.get("/:team", (req, res, next) => {
+router.get("/team/:team", (req, res, next) => {
   const team = req.params.memberId;
   Members.find({ team })
     .then((teamMembers) => {
