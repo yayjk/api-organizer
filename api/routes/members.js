@@ -70,7 +70,7 @@ router.get("/:memberId", (req, res, next) => {
 
 //get member by team
 router.get("/team/:team", (req, res, next) => {
-  const team = req.params.memberId;
+  const team = req.params.team;
   Members.find({ team })
     .then((teamMembers) => {
       res.status(200).json({ teamMembers });
