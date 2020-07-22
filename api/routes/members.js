@@ -65,5 +65,15 @@ router.get("/:memberId", (req, res, next) => {
         res.status(500).json({ error: "No member associated with that id" });
       }
     })
-    .catch((error) => res.status(500).json(erro));
+    .catch((error) => res.status(500).json(error));
+});
+
+//get member by team
+router.get("/:team", (req, res, next) => {
+  const team = req.params.memberId;
+  Members.find({ team })
+    .then((teamMembers) => {
+      res.status(200).json({ teamMembers });
+    })
+    .catch((erro) => res.status(200).json(error));
 });
